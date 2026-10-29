@@ -4,10 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Manager SPA</title>
-    <link rel="stylesheet" src="style.css">
-    <script src="main.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    
 </head>
 <body>
-    <!-- <yeah> livres</yeah> -->
+   <header>
+    <div class="logo">📚 Book Manager</div>
+   </header>
+
+   <section class=" first-section">
+    <h1>Ajouter un nouveau livre</h1>
+    <form id="section-form" novalidate>
+        <div class="group">
+        <label for="titre">Title:</label>
+        <input id="titre" name="titre" type="text" placeholder="Entrez le titre..." required/>
+        <p id="titre-erreur" class="mt-1 hidden text-sm font-medium text-red-500"></p>
+        </div>
+
+        <div class="group">
+        <label for="author">Author:</label>
+        <input id="author" name="author" type="text" placeholder="Entrez l'auteur..." required/>
+        <p id="author-erreur" class="mt-1 hidden text-sm font-medium text-red-500"></p>
+        </div>
+
+        <div class="group">
+        <label for="genre">Genre:</label>
+        <input id="genre" name="genre" type="text" placeholder="genre de livre..."/>
+        <p id="genre-erreur" class="mt-1 hidden text-sm font-medium text-red-500"></p>
+        </div>
+
+        <div class="group">
+        <label for="year">Year:</label>
+        <input id="year" name="year" type="number" placeholder="Entrez l'année..."/>
+        <p id="year-erreur" class="mt-1 hidden text-sm font-medium text-red-500"></p>
+        </div>
+
+        <div class="group">
+        <label for="status">Status:</label>
+        <select id="status">
+            <option value="" disabled selected>choiser une choix</option>
+            <option value="to-read">to-read</option>
+            <option value="reading">reading</option>
+            <option value="read">read</option>
+        </select>
+        <p id="status-erreur" class="mt-1 hidden text-sm font-medium text-red-500"></p>
+        </div>
+
+        <div class="group">
+        <label for="message">Description (Optionnel)</label>
+        <textarea id="message" name="message" type="text" rows="3" placeholder="Une Petite Description..."></textarea>
+        </div>
+        
+        <button class="btn" type="submit">Ajouter un livre</button>
+    </form>
+
+    
+   </section>
+<div class="cup">
+        <input id="recherche" type="text" placeholder="Rechercher un livre">
+        <div class="buttons">
+            <button class="btn1" type="button">chercher par titre</button>
+            <button class="btn2" type="button">chercher par genre</button>
+        </div>
+</div>
+<table id="head">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+           <th>Author</th>
+           <th>Genre</th>
+           <th>Year</th>
+            <th>status</th>
+        </tr>
+    </thead>
+    <tbody id="tableauCorps" class="divide-y divide-gray-300">
+    
+</tbody>
+</table>
+
+
+
 </body>
 </html>
