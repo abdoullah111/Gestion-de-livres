@@ -64,26 +64,55 @@
    </section>
 <div class="cup">
         <input id="recherche" type="text" placeholder="Rechercher un livre">
+        <p id="search-erreur" class="hidden mt-1 text-sm font-medium text-red-500"></p>
         <div class="buttons">
-            <button class="btn1" type="button">chercher par titre</button>
-            <button class="btn2" type="button">chercher par genre</button>
+            <button id="search" class="btn1" type="button">chercher par titre</button>
+            <button id="find" class="btn2" type="button">chercher par author</button>
+        <select>
+            <option value="" disabled selected hidden>trier par..</option>
+            <option value="titre">titre</option>
+            <option value="author">author</option>
+            <option value="year">year</option>
+        </select>
         </div>
 </div>
+
+<table id="disk" class="hidden">
+    <thead>
+        <tr>
+           <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Year</th>
+            <th>status</th>
+            <th>Description</th>
+            <th>Action</th> 
+        </tr>
+        <tbody id="corps" class="divide-y divide-gray-300"></tbody>
+    </thead>
+</table>
+
+
 <table id="head">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>Id</th>
             <th>Title</th>
-           <th>Author</th>
-           <th>Genre</th>
-           <th>Year</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Year</th>
             <th>status</th>
+            <th>Description</th>
+            <th>Action</th>
         </tr>
     </thead>
-    <tbody id="tableauCorps" class="divide-y divide-gray-300">
-    
-</tbody>
+    <tbody id="tableauCorps" class="divide-y divide-gray-300"></tbody>
 </table>
+
+
+
+
 
 
 

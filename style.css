@@ -125,22 +125,9 @@ label{
 .buttons{
     margin-top: 20px;
     display: flex;
-    flex-direction: row;
+    gap: 50px;
 }
-.btn2{
-    margin-left: 100px;
-    width: 10rem;
-    height: 40px;
-    border-radius: 10px;
-    background-color: #426e5c;
-    color: white;
-    border: none;
-    font-size: 15px;
-    box-shadow:0 10px 30px rgba(2, 15, 10, 0.55);
-    
-}
-.btn1{
-    margin-left: 7px;
+.btn2, .btn1{
     width: 10rem;
     height: 40px;
     border-radius: 10px;
@@ -150,9 +137,24 @@ label{
     font-size: 15px;
     box-shadow:0 10px 30px rgba(2, 15, 10, 0.55);
 }
-
+.buttons select{
+    background-color: #426e5c;
+    cursor: pointer;
+    color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(2, 15, 10, 0.55);;
+}
 table{
-    border: 2px solid red;
+    border: 2px solid #5E9C80;
+    width: 100%;
+    color: white;
+    border-radius: 10px;
+    margin-top: 50px;
+    padding-left: 10px;
+}
+tr, th, td{
+    border: 2px solid #5E9C80;
+    padding: 5px 20px;
 }
 
 
