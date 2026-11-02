@@ -36,7 +36,15 @@ function validerAll(event){
         Status: LeStatus.value,
         description: LeDescription.value,
     }
-    livres.push(livre);
+
+    if(indexModifier === null){
+        livres.push(livre);
+    }else{
+        livre.Id = livres[indexModifier].Id;
+        livres[indexModifier]=livre;
+        indexModifier = null;
+        btnSubmit.textContent = "Ajouter un livre"
+    }
     localStorage.setItem('livres', JSON.stringify(livres));
     afficherLivres(livres);
     form.reset();
@@ -58,7 +66,8 @@ function afficherLivres(arr) {
                 <td>${livre.Year}</td>
                 <td>${livre.Status}</td>
                 <td>${livre.description}</td>
-                <td class="flex justify-around"><button class="bg-green-500 p-2 rounded-xl" id="mod">modifier</button>
+                <td class="flex justify-around"><button class="btnModifier bg-green-500 p-2 rounded-xl" id="mod"
+                 data-index="${livres.indexOf(livre)}">modifier</button>
                 <button class="bg-red-500 p-2 rounded-xl"  onclick = "supprimerLivre(${livre.Id})">supprimer</button>
                 </td>
             </tr>
@@ -181,7 +190,24 @@ function supprimerLivre(id){
     afficherLivres(livres);
 }
 
+const btnSubmit = document.querySelector('.btn')
+let indexModifier = null;
 
+LeBody.addEventListener("click", function(event) {
+
+    if (event.target.classList.contains("btnModifier")) {
+
+        indexModifier = Number(event.target.dataset.index);
+
+        LeTitre.value = livres[indexModifier].Titre;
+        LeAuthor.value = livres[indexModifier].author;
+        LeGenre.value = livres[indexModifier].Genre;
+        LeYear.value = livres[indexModifier].Year;
+        LeStatus.value = livres[indexModifier].Status;
+        LeDescription.value = livres[indexModifier].description;
+        btnSubmit.textContent = "modifier le llivre"
+    }
+});
 
 
 
