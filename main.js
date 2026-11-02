@@ -36,19 +36,27 @@ function validerAll(event){
         Status: LeStatus.value,
         description: LeDescription.value,
     }
-    livres.push(livre);
+
+    if(indexModifier === null){
+        livres.push(livre);
+    }else{
+        livre.Id = livres[indexModifier].Id;
+        livres[indexModifier]=livre;
+        indexModifier = null;
+        btnSubmit.textContent = "Ajouter un livre"
+    }
     localStorage.setItem('livres', JSON.stringify(livres));
-    afficherLivres();
+    afficherLivres(livres);
     form.reset();
 }
 
 
 
 
-function afficherLivres() {
+function afficherLivres(arr) {
     LeBody.innerHTML = "";
 
-    livres.forEach(function(livre) {
+    arr.forEach(function(livre) {
         LeBody.innerHTML += `
             <tr>
                 <td>${livre.Id}</td>
@@ -58,14 +66,15 @@ function afficherLivres() {
                 <td>${livre.Year}</td>
                 <td>${livre.Status}</td>
                 <td>${livre.description}</td>
-                <td class="flex justify-around"><button class="bg-green-500 p-2 rounded-2xl">modifier</button>
-                <button class="bg-red-500 p-2 rounded-2xl" id="sup">supprimer</button>
+                <td class="flex justify-around"><button class="btnModifier bg-green-500 p-2 rounded-xl" id="mod"
+                 data-index="${livres.indexOf(livre)}">modifier</button>
+                <button class="bg-red-500 p-2 rounded-xl"  onclick = "supprimerLivre(${livre.Id})">supprimer</button>
                 </td>
             </tr>
         `;
     });
 };
-afficherLivres();
+afficherLivres(livres);
 
 
 
@@ -90,7 +99,7 @@ function createTable(arr){
                 <td>${arr[0].Status}</td>
                 <td>${arr[0].description}</td>
                 <td class="flex justify-around"><button class="bg-green-500 p-2 rounded-2xl">modifier</button>
-                <button class="bg-red-500 p-2 rounded-2xl" id="sup">supprimer</button>
+                <button class="bg-red-500 p-2 rounded-2xl">supprimer</button>
                 </td>
             </tr>
         `;
@@ -159,12 +168,46 @@ LeFind.addEventListener('click', function(){
 })
  
 
+const LeTrier = document.getElementById('trier');
+LeTrier.addEventListener('change', function(){
+   const livresTrier = [...livres];
+   if(LeTrier.value === "titre"){
+    livresTrier.sort((a, b)=> a.Titre.localeCompare(b.Titre));
+   }else if(LeTrier.value === "author"){
+    livresTrier.sort((a, b)=> a.author.localeCompare(b.author))
+   }else{
+    livresTrier.sort((a, b)=> b.Year - a.Year);
+   }
+   afficherLivres(livresTrier);
+   
+})
 
 
 
+function supprimerLivre(id){
+    livres = livres.filter(livre=> livre.Id !== id);
+    localStorage.setItem('livres', JSON.stringify(livres));
+    afficherLivres(livres);
+}
 
+const btnSubmit = document.querySelector('.btn')
+let indexModifier = null;
 
+LeBody.addEventListener("click", function(event) {
 
+    if (event.target.classList.contains("btnModifier")) {
+
+        indexModifier = Number(event.target.dataset.index);
+
+        LeTitre.value = livres[indexModifier].Titre;
+        LeAuthor.value = livres[indexModifier].author;
+        LeGenre.value = livres[indexModifier].Genre;
+        LeYear.value = livres[indexModifier].Year;
+        LeStatus.value = livres[indexModifier].Status;
+        LeDescription.value = livres[indexModifier].description;
+        btnSubmit.textContent = "modifier le llivre"
+    }
+});
 
 
 
